@@ -23,6 +23,10 @@ jobs:
       - name: Install Python dependencies
         run: pip install -r requirements.txt # Modify this as per your Python setup
 
+      - name: Install Specific Version of mediapipe
+        run: |
+          pip install --pre mediapipe==0.10.7
+          
       - name: Install Snyk CLI
         run: npm install -g snyk
 
