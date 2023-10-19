@@ -1,0 +1,37 @@
+name: Example workflow using Snyk
+on: push
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14 # Use the version you need
+
+      - name: Install node dependencies
+        run: npm install --force
+
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.12.0
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt # Modify this as per your Python setup
+
+      - name: Install Snyk CLI
+        run: npm install -g snyk
+
+      - name: Run Snyk to check for vulnerabilities
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_API_TOKEN }}
+        run: |
+          # Node.js assessment
+          snyk test
+
+          # Python assessment
+          snyk test --all-projects
