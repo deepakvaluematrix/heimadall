@@ -18,7 +18,7 @@ jobs:
       - name: Install Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.12.0
+          python-version: 3.7.0
 
       - name: Install Python dependencies
         run: pip install -r requirements.txt # Modify this as per your Python setup
